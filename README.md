@@ -1,24 +1,22 @@
-# README
+# FACEBOOK CLONE - RAILS
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The purpose of the project is to ensure that I can put into practice using Rails to create a simple clone of facebook while focusing on the following areas:
 
-Things you may want to cover:
+* Associations In Rails
+* Security In Rails (OAuth)
+* Test Driven Development
 
-* Ruby version
+For more information please refer to the link below
 
-* System dependencies
+[The Odin Project: Building Facebook](https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project)
 
-* Configuration
+## Useful Resources
 
-* Database creation
+* [Active Record Associations](https://guides.rubyonrails.org/association_basics.html)
+* [Devise](https://github.com/plataformatec/devise)
+* [Feature Testing with Capybara](https://github.com/teamcapybara/capybara)
+* [OminAuth](https://github.com/omniauth/omniauth)
 
-* Database initialization
+## Contributors
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* [Edward Iga Kigongo](https://github.com/igakigongo)
