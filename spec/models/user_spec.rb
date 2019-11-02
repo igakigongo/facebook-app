@@ -6,6 +6,20 @@ RSpec.describe User, type: :model do
     expect(user).to be_valid
   end
 
+  context 'before save' do
+    let(:email) { 'MALCOMEDDIE@HOTMAIL.COM' }
+    let(:user) { build(:user, email: email) }
+    it 'has their email transformed to lowercase' do
+      user.save
+      expect(user.email).to eq email.downcase
+    end
+
+    it 'gets an image_url generated from their email address' do
+      user.save
+      expect(user.image_url).to be
+    end
+  end
+
   context 'is invalid' do
     let(:user) { User.new }
     let(:validation_message) { ["can't be blank"] }
