@@ -33,23 +33,23 @@ RSpec.describe User, type: :model do
     end
 
     it 'without an email address' do
-      expect(user.errors.messages[:email]).to eq ["can't be blank"]
+      expect(user.errors.messages[:email]).to eq validation_message
     end
 
     it 'without a first name' do
-      expect(user.errors.messages[:first_name]).to eq ["can't be blank"]
+      expect(user.errors.messages[:first_name]).to eq validation_message
     end
 
     it 'without a gender' do
-      expect(user.errors.messages[:gender]).to eq ["can't be blank"]
+      expect(user.errors.messages[:gender]).to eq validation_message
     end
 
     it 'without a password' do
-      expect(user.errors.messages[:password]).to eq ["can't be blank"]
+      expect(user.errors.messages[:password]).to eq validation_message
     end
 
     it 'without a surname' do
-      expect(user.errors.messages[:surname]).to eq ["can't be blank"]
+      expect(user.errors.messages[:surname]).to eq validation_message
     end
   end
 end

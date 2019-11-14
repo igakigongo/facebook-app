@@ -3,7 +3,8 @@ require 'digest/md5'
 class User < ApplicationRecord
   # devise modules
   # :omniauthable
-  devise :confirmable, :database_authenticatable, :lockable, :registerable,
+  # :confirmable, 
+  devise :database_authenticatable, :lockable, :registerable,
          :recoverable, :rememberable, :timeoutable, :trackable, :validatable
 
   # associations
