@@ -5,4 +5,5 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   root to: 'profile#index'
+  resources :posts
 end

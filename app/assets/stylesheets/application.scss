@@ -1,0 +1,127 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "font-awesome";
+
+@mixin image-dimensions($height, $width) {
+  height: $height;
+  width: $width;
+}
+
+@mixin nav-link-font-props($font-size: .75rem) {
+  font-size: $font-size;
+  font-weight: 600;
+}
+
+$blue: #4267b2;
+$gray: #e9ebee;
+$white: #fff;
+
+
+.btn-primary {
+  background-color: $blue;
+  border-color: $blue;
+}
+
+.card {
+  border-radius: .125rem;
+}
+
+.card-header, .card-body, .card-footer {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+body {
+  background-color: $gray;
+}
+
+.fb-nav {
+  background-color: $blue !important;
+  border-bottom: 1px solid #29487d;
+  color: $white;
+
+  .navbar-brand {
+    display: flex;
+    justify-content: center;
+    margin-right: .25rem;
+    .fa {
+      font-size: 1.5rem;
+    }
+  }
+  
+  .nav-item {
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-link {
+    @include nav-link-font-props();
+    color: $white;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .nav-profile-image {
+    @include image-dimensions(1.5rem, 1.5rem);
+  }
+
+  .input-group {
+    width: 30rem;
+
+    .form-control,
+    .input-group-append {
+      height: 1.5rem;
+    }
+
+    input {
+      border-bottom-left-radius: 0.125rem;
+      border-top-left-radius: 0.125rem;
+      border: 1px solid $blue;
+      border-right: none;
+    }
+
+    .input-group-append {
+      border-bottom-right-radius: 0.125rem;
+      border-top-right-radius: 0.125rem;
+      border: 1px solid $blue;
+      border-left: none;
+
+      span {
+        border-bottom-right-radius: 0.125rem;
+        border-top-right-radius: 0.125rem;
+      }
+    }
+  }
+}
+
+.cover-section {
+  .nav-link {
+    @include nav-link-font-props(.9rem);
+
+    &:hover{
+      background-color: $gray;
+    }
+  }
+}
+
+.small-nav-link {
+  @include nav-link-font-props(.85rem);
+}
+
+.create-post-author-image {
+  @include image-dimensions(2.5rem, 2.5rem);
+}
