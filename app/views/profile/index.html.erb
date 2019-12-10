@@ -42,7 +42,21 @@
         <% if @posts.empty? %>
           <h1>You do not have any posts</h1>
         <% else %>
-          <h1>You have posts</h1>
+          <% @posts.each do |post| %>
+            <div class='card mt-3 post'>
+              <div class='card-header py-2 d-flex'>
+                <img alt='' class='rounded-circle gravatar' src='<%= post.creator.image_url %>%' />
+                <div class='post-links mx-2 d-flex flex-column'>
+                  <a href='#' class='medium-nav-link'><%= "#{post.creator.first_name} #{post.creator.surname}"%></a>
+                  <a href='#' class='small text-muted'><%= post.created_at.strftime("%-d %B") %></a>
+                </div>
+                <span class='ml-auto'><%= fa_icon 'ellipsis-h' %></span>
+              </div>
+              <div class='card-body'>
+                <p><%= post.text %></p>
+              </div>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </div>
