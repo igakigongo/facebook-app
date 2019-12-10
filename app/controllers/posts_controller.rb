@@ -4,7 +4,7 @@ class PostsController < ApplicationController
     post_params = params.require(:post).permit(:text)
     new_post = owner.posts.build(post_params)
     if (new_post.save)
-      flash[:notice] = 'Post succsessfully created'
+      flash[:notice] = 'Post successfully created'
     else
       flash[:alert] = 'Post was not created'
     end

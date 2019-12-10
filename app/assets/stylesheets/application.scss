@@ -125,3 +125,7 @@ body {
 .create-post-author-image {
   @include image-dimensions(2.5rem, 2.5rem);
 }
+
+textarea.no-outline:focus {
+  box-shadow: none;
+}

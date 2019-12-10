@@ -20,7 +20,7 @@
     <div class='row no-gutters'>
       <div class='col-4 pr-2'></div>
       <div class='col-8 pl-2'>
-        <%= form_with model: @new_post, class: '' do |f| %>
+        <%= form_for(@new_post, as: :post) do |f| %>
           <div class='card'>
             <div class='card-header py-0'>
               <ul class='nav'>
@@ -32,7 +32,7 @@
             </div>
             <div class='card-body d-flex'>
               <img alt='' class="rounded-circle create-post-author-image border mr-3" src="<%= asset_path('anonymous.jpg')%>" />
-              <%= f.text_area :text, size: "40x4", class: 'form-control border-0' %>
+              <%= f.text_area :text, class: 'form-control border-0 p-0 no-outline', id: 'create_post_text', placeholder: 'What\'s on your mind'  %>
             </div>
             <div class='card-footer'>
               <%= f.submit "Post", class: 'btn btn-block btn-primary btn-sm' %>
