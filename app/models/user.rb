@@ -20,6 +20,9 @@ class User < ApplicationRecord
   validates :surname, presence: true
 
   # helpers
+  def full_name
+    "#{first_name} #{surname}"
+  end
 
   protected
 

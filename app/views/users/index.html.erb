@@ -1,0 +1,16 @@
+<div class='container mt-3'>
+  <% if @users.empty? %>
+    <div class='alert alert-primary'>
+      <%= fa_icon 'lightbulb-o' %> No other users on the system except you
+    </div>
+  <% else %>
+    <div class='col'>
+      <% @users.each do |user| %>
+        <p class='bg-white border p-2 shadow d-flex justify-content-between'>
+          <span><%= user.full_name %></span>
+          <button class='btn btn-primary btn-sm'>Dummy Send Request</button>
+        </p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
