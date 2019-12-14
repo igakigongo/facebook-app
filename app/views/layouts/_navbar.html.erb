@@ -1,0 +1,55 @@
+<header>
+  <% if !current_user.nil? %>
+    <nav class="navbar navbar-expand-lg bg-primary py-0 fb-nav">
+      <div class="container d-flex justify-content-center px-0">
+        <a class="navbar-brand text-white" href="#"><%= fa_icon "facebook-official 2x" %></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <form class="form-inline mr-auto">
+          <div class="input-group input-group-sm">
+            <input type="text" class="form-control py-0" placeholder="<%= "#{current_user.first_name} #{current_user.surname}" %>" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <span class="input-group-text py-0" id="basic-addon2"><%= fa_icon "search" %></span>
+            </div>
+          </div>
+        </form>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          
+          <ul class="navbar-nav ml-auto d-inline-flex">
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <img alt="<%= current_user.first_name %>" class="rounded-circle nav-profile-image" src="<%= asset_path('anonymous.jpg')%>" />
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><%= current_user.first_name %></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Find Friends</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Create</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  <% end %>
+</header>
