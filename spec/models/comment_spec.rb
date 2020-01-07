@@ -4,11 +4,11 @@ RSpec.describe Comment, type: :model do
   let(:user) { create(:user) }
 
   it 'is valid with all attributes filled in' do
-    post = user.posts.build(text: "Assume any post, it can be attached to some other user")
+    post = user.posts.build(text: 'Assume any post, it can be attached to some other user')
     comment = post.comments.build(text: 'I like this kind of stuff', user_id: user.id)
     expect(comment).to be_valid
   end
-  
+
   context 'is invalid' do
     let(:comment) { Comment.new }
 
@@ -26,12 +26,12 @@ RSpec.describe Comment, type: :model do
 
     it 'without an associated user/commentor' do
       expect(comment).to be_invalid
-      expect(comment.errors.messages[:commentor]).to include("must exist")
+      expect(comment.errors.messages[:commentor]).to include('must exist')
     end
 
     it 'without an associated post' do
       expect(comment).to be_invalid
-      expect(comment.errors.messages[:post]).to include("must exist")
+      expect(comment.errors.messages[:post]).to include('must exist')
     end
   end
 end
