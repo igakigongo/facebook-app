@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   # associations
   has_many :posts
+  # has_many :comments
 
   # callbacks
   before_save :transform_email, :create_image_url
