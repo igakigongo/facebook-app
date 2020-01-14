@@ -14,3 +14,12 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+function growTextArea(element){
+  element.style.height = "10px";
+  element.style.height = element.scrollHeight + "px";
+}
+
+function commentKeyPressEventHandler(event){
+  console.log(event);
+}

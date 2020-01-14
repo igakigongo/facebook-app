@@ -1,3 +1,57 @@
 // Place all the styles related to the Profile controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.post-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  .btn-comment, .btn-like {
+
+    color: #555;
+    font-weight: bold;
+    font-size: .75rem;
+
+    &:hover{
+      background-color: rgba(233, 235, 238, 0.5);
+    }
+
+    .fa-2x {
+      font-size: 1.2rem;
+    }
+  }
+
+  .btn-like {
+    grid-column: 1;
+  }
+
+  .btn-comment{
+    grid-column: 2;
+  }
+}
+
+.add-comment {
+  column-gap: .5rem;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+
+  img {
+    grid-column: 1;
+  }
+
+  textarea {
+    grid-column: 2/13;
+    background-color: rgba(233, 235, 238, 0.5);
+    border-radius: 1.2rem;
+    box-shadow:none !important;
+    font-size: .8rem;
+    outline: none;
+    overflow: hidden;
+    resize: none;
+    /*
+      
+      
+      min-height: 50px;
+      max-height: 100px;
+    */
+  }
+}

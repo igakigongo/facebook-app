@@ -126,7 +126,6 @@ body {
   @include nav-link-font-props(.9rem);
 }
 
-
 .create-post-author-image {
   @include image-dimensions(2.5rem, 2.5rem);
 }
@@ -139,7 +138,10 @@ textarea.no-outline:focus {
 /* post section on profile page */
 .post {
   .gravatar {
-    height: 2.5rem;
-    width: 2.5rem;
+    @include image-dimensions(2.5rem, 2.5rem);
+  }
+
+  .gravatar-small {
+    @include image-dimensions(2.0rem, 2.0rem);
   }
 }

@@ -43,8 +43,8 @@
           <h1>You do not have any posts</h1>
         <% else %>
           <% @posts.each do |post| %>
-            <div class='card mt-3 post'>
-              <div class='card-header py-2 d-flex'>
+            <div class='card mt-3 post rounded-sm'>
+              <div class='card-header py-2 d-flex bg-white'>
                 <img alt='' class='rounded-circle gravatar' src='<%= post.creator.image_url %>%' />
                 <div class='post-links mx-2 d-flex flex-column'>
                   <a href='#' class='medium-nav-link'><%= "#{post.creator.first_name} #{post.creator.surname}"%></a>
@@ -52,8 +52,23 @@
                 </div>
                 <span class='ml-auto'><%= fa_icon 'ellipsis-h' %></span>
               </div>
-              <div class='card-body'>
-                <p><%= post.text %></p>
+              <div class='card-body pb-0'>
+                <p class='mb-0 pb-3 border-bottom'><%= post.text %></p>
+                <div class='post-actions my-1'>
+                  <button class='btn btn-like'><%= fa_icon 'thumbs-o-up 2x'%> Like</button>
+                  <button class='btn btn-comment'><%= fa_icon 'comment 2x'%> Comment</button>
+                </div>
+              </div>
+              <div class='card-footer bg-white py-0'>
+                <!-- list all comments here -->
+                <!-- create comment section is the last -->
+                <div class='py-2 add-comment'>
+                  <div class='d-flex flex-row justify-content-center'>
+                    <img alt='' class='align-self-start rounded-circle gravatar-small' src='<%= post.creator.image_url %>%' />
+                  </div>
+                  <textarea class='form-control py-2' oninput='growTextArea(this)' onkeydown='commentKeyPressEventHandler(evt, this)' rows='1'>
+                  </textarea>
+                </div>
               </div>
             </div>
           <% end %>
