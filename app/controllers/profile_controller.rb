@@ -4,5 +4,6 @@ class ProfileController < ApplicationController
   def index
     @posts = Post.includes(comments: [:commentor]).where('user_id = ?', current_user.id).order('created_at desc')
     @new_post = Post.new
+    @new_comment = Comment.new
   end
 end

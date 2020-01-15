@@ -61,14 +61,30 @@
               </div>
               <div class='card-footer bg-white py-0'>
                 <!-- list all comments here -->
+                <% if post.comments.any? %>
+                  <ul class='comments p-0'>
+                    <% post.comments.each do |c| %>
+                      <li class='py-2'>
+                        <img alt='' class='align-self-start rounded-circle gravatar-small' src='<%= post.creator.image_url %>%' />
+                        <span class='ml-3 p-2 rounded-lg'><%= link_to c.commentor.full_name, path: root_path %> <%= c.text %></span>
+                      </li>
+                    <% end %>
+                  </ul>
+                <% end %>
                 <!-- create comment section is the last -->
-                <div class='py-2 add-comment'>
-                  <div class='d-flex flex-row justify-content-center'>
-                    <img alt='' class='align-self-start rounded-circle gravatar-small' src='<%= post.creator.image_url %>%' />
+                <%= form_for(@new_comment, as: :comment) do |cf| %>
+                  <%= cf.hidden_field :post_id, :value => post.id %>
+                  <div class='py-2 add-comment'>
+                    <div class='d-flex flex-row justify-content-center gravatar-holder'>
+                      <img alt='' class='align-self-start rounded-circle gravatar-small' src='<%= post.creator.image_url %>%' />
+                    </div>
+                    <%= cf.text_area :text %>
+                    <!--<textarea class='form-control py-2' name='comment[text]' oninput='growTextArea(this)' 
+                      onkeydown='commentKeyPressEventHandler(evt, this)' rows='1'>
+                    </textarea>-->
+                    <button class='btn btn-primary btn-save'>Save</button>
                   </div>
-                  <textarea class='form-control py-2' oninput='growTextArea(this)' onkeydown='commentKeyPressEventHandler(evt, this)' rows='1'>
-                  </textarea>
-                </div>
+                <% end %>
               </div>
             </div>
           <% end %>
