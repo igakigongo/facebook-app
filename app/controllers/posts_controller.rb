@@ -10,4 +10,11 @@ class PostsController < ApplicationController
     end
     redirect_to root_url
   end
+
+  def index
+    # TODO: Should show posts for (current users + friends)
+    @posts = Post.includes(comments: [:commentor])
+      .where('user_id = ?', current_user.id)
+      .order('created_at desc')
+  end
 end

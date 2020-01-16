@@ -1,3 +1,81 @@
-// Place all the styles related to the Profile controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.post-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  .btn-comment, .btn-like {
+
+    color: #555;
+    font-weight: bold;
+    font-size: .75rem;
+
+    &:hover{
+      background-color: rgba(233, 235, 238, 0.5);
+    }
+
+    .fa-2x {
+      font-size: 1.2rem;
+    }
+  }
+
+  .btn-like {
+    grid-column: 1;
+  }
+
+  .btn-comment{
+    grid-column: 2;
+  }
+}
+
+.add-comment {
+  column-gap: .5rem;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+
+  img {
+    grid-column: 1;
+  }
+
+  textarea {
+    grid-column: 2/11;
+    background-color: rgba(233, 235, 238, 0.5);
+    border-radius: 1.2rem;
+    box-shadow:none !important;
+    font-size: .8rem;
+    outline: none;
+    overflow: hidden;
+    resize: none;
+  }
+
+  .btn-save {
+    grid-column: 11/13;
+  }
+}
+
+.comments {
+  font-size: .85rem;
+  list-style: none;
+
+  span {
+    background-color: rgba(233, 235, 238, 0.9);
+  }
+
+  .comment {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    row-gap: .5rem;
+
+    .gravatar-small {
+      grid-column: 1/2;
+    }
+
+    .comment-description {
+      grid-column: 2/13;
+    }
+
+    .comment-like-section {
+      font-size: inherit;
+      grid-column: 2;
+      grid-row: 2;
+    }
+  }
+}

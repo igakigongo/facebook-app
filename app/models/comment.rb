@@ -1,7 +1,7 @@
-class Post < ApplicationRecord
+class Comment < ApplicationRecord
   # associations
-  belongs_to :creator, class_name: 'User', foreign_key: 'user_id'
-  has_many :comments
+  belongs_to :commentor, class_name: 'User', foreign_key: 'user_id'
+  belongs_to :post
   has_many :likes, as: :likeable, dependent: :destroy
 
   # validations
