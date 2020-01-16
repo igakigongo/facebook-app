@@ -3,7 +3,8 @@
     <nav class="navbar navbar-expand-lg bg-primary py-0 fb-nav">
       <div class="container d-flex justify-content-center px-0">
         <a class="navbar-brand text-white" href="#"><%= fa_icon "facebook-official 2x" %></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -17,7 +18,6 @@
         </form>
         
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          
           <ul class="navbar-nav ml-auto d-inline-flex">
             <li class="nav-item">
               <a class="nav-link" href="#">
@@ -25,13 +25,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"><%= current_user.first_name %></a>
+              <a class="nav-link" href=<%= "/profile/#{current_user.id}" %>><%= current_user.first_name %></a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home</a>
+              <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Find Friends</a>
+              <a class="nav-link" href="/users/index">Find Friends</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Create</a>

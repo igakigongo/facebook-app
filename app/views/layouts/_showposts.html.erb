@@ -6,7 +6,7 @@
       <div class='card-header py-2 d-flex bg-white'>
         <img alt='' class='rounded-circle gravatar' src='<%= post.creator.image_url %>%' />
         <div class='post-links mx-2 d-flex flex-column'>
-          <a href='#' class='medium-nav-link'><%= "#{post.creator.first_name} #{post.creator.surname}"%></a>
+          <a href=<%= "/profile/#{post.user_id}" %> class='medium-nav-link'><%= "#{post.creator.first_name} #{post.creator.surname}"%></a>
           <a href='#' class='small text-muted'><%= post.created_at.strftime("%-d %B") %></a>
         </div>
         <span class='ml-auto'><%= fa_icon 'ellipsis-h' %></span>
