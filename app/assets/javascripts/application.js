@@ -23,4 +23,6 @@ $(function(){
     element.style.height = "10px";
     element.style.height = element.scrollHeight + "px";
   });
+
+  $('[data-toggle="tooltip"]').tooltip();
 })();

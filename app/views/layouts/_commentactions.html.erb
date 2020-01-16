@@ -1,0 +1,15 @@
+<% @old = comment.likes.find_by(user_id: current_user) %>
+<% @should_like = !@old %>
+<% @like = @should_like ? Like.new : @old %>
+<% @method = @should_like ? :post : :delete %>
+<% @button_text = @should_like ? 'Like': 'Unlike' %>
+
+<div class='comment-like-section'>
+  <%= form_for(@like, html: { class: 'w-100', id: "comment-like-form-#{comment.id}"}, method: @method) do |f| %>
+    <%= f.hidden_field :likeable_id, :value => comment.id, id: "comment-likeable-id-#{comment.id}" %>
+    <%= f.hidden_field :likeable_type, :value => 'Comment', id: "comment-likeable-type-#{comment.id}" %>
+    <button class='btn btn-sm' type='submit'>
+      <%= @button_text %>
+    </button>
+  <% end %>
+</div>

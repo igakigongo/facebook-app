@@ -1,0 +1,17 @@
+<% @old_like = post.likes.find_by(user_id: current_user.id) %>
+<% @should_like = !@old_like %>
+<% @like = @should_like ? Like.new : @old_like %>
+<% @method = @should_like ? :post : :delete %>
+<% @icon_class = @should_like ? 'thumbs-o-up 2x' : 'thumbs-o-down 2x' %>
+<% @button_text = @should_like ? 'Like': 'Unlike' %>
+
+<div class='post-actions my-1'>  
+  <%= form_for(@like, html: { class: 'w-100', id: "post-like-form-#{post.id}"}, method: @method) do |f|  %>
+    <%= f.hidden_field :likeable_id, :value => post.id, id: "post-likeable-id-#{post.id}" %>
+    <%= f.hidden_field :likeable_type, :value => 'post', id: "post-likeable-type-#{post.id}" %>
+    <button class='btn btn-like btn-block' type='submit'>
+      <%= fa_icon @icon_class %> <%= @button_text %>
+    </button>
+  <% end %>
+  <button class='btn btn-comment'><%= fa_icon 'comment 2x'%> Comment</button>
+</div>

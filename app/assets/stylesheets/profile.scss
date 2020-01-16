@@ -1,6 +1,3 @@
-// Place all the styles related to the Profile controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 .post-actions {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -76,6 +73,7 @@
     }
 
     .comment-like-section {
+      font-size: inherit;
       grid-column: 2;
       grid-row: 2;
     }

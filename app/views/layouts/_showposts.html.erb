@@ -1,0 +1,40 @@
+<% if @posts.empty? %>
+  <h1>You do not have any posts</h1>
+<% else %>
+  <% @posts.each do |post| %>
+    <div class='card mt-3 post rounded-sm'>
+      <div class='card-header py-2 d-flex bg-white'>
+        <img alt='' class='rounded-circle gravatar' src='<%= post.creator.image_url %>%' />
+        <div class='post-links mx-2 d-flex flex-column'>
+          <a href='#' class='medium-nav-link'><%= "#{post.creator.first_name} #{post.creator.surname}"%></a>
+          <a href='#' class='small text-muted'><%= post.created_at.strftime("%-d %B") %></a>
+        </div>
+        <span class='ml-auto'><%= fa_icon 'ellipsis-h' %></span>
+      </div>
+      <div class='card-body pb-0'>
+        <p class='mb-0 pb-3 border-bottom'><%= post.text %></p>
+        <%= render partial: 'layouts/postactions', locals: { post: post } %>
+      </div>
+      <div class='card-footer bg-white py-0'>
+        <!-- list all comments here -->
+        <% if post.comments.any? %>
+          <ul class='comments p-0'>
+            <% post.comments.each do |c| %>
+              <li class='comment py-2'>
+                <div class='d-flex flex-row justify-content-center gravatar-holder'>
+                  <img alt='' class='rounded-circle gravatar-small' src='<%= post.creator.image_url %>%' />
+                </div>
+                <span class='p-2 rounded-lg comment-description'> 
+                  <a class='font-weight-bold' href='#'><%= c.commentor.full_name %></a> <%= c.text %>
+                </span>
+                <%= render partial: 'layouts/commentactions', locals: { comment: c } %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+        <!-- create comment section is the last -->
+        <%= render partial: 'layouts/createcomment', locals: { post: post } %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

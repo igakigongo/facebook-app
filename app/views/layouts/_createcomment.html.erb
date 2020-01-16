@@ -1,0 +1,11 @@
+<% @comment = Comment.new %>
+<%= form_for(@comment, html: { id: "create-comment-#{post.id}"}) do |f| %>
+  <%= f.hidden_field :post_id, :value => post.id, id: "create-comment-post-id-#{post.id}" %>
+  <div class='py-2 add-comment'>
+    <div class='d-flex flex-row justify-content-center gravatar-holder'>
+      <img alt='' class='align-self-start rounded-circle gravatar-small' src='<%= post.creator.image_url %>%' />
+    </div>
+    <%= f.text_area :text, class: 'form-control py-2 comment-form-description-editor', id: "comment-text-id-#{post.id}", rows: 1 %>
+    <button class='align-self-start btn btn-primary btn-sm btn-save'>Save</button>
+  </div>
+<% end %>

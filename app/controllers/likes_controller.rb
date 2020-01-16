@@ -12,11 +12,8 @@ class LikesController < ApplicationController
   # DELETE /likes/1
   # DELETE /likes/1.json
   def destroy
-    # @like.destroy
-    # respond_to do |format|
-    #   format.html { redirect_to likes_url, notice: 'Like was successfully destroyed.' }
-    #   format.json { head :no_content }
-    # end
+    destroyed = Like.dislike(current_user, @resource)
+    p 'the like was not destroyed' unless destroyed
     redirect_to root_url
   end
 
@@ -24,8 +21,7 @@ class LikesController < ApplicationController
 
   def find_resource_type
     likeable = like_params
-    @resource = nil
-    @resource = if likeable[:likeable_type].eql?('comment')
+    @resource = if likeable[:likeable_type].eql?('Comment')
                   Comment.find_by(id: likeable[:likeable_id])
                 else
                   Post.find_by(id: likeable[:likeable_id])
