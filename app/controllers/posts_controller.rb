@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-
   def create
     owner = current_user
     post_params = params.require(:post).permit(:text)
@@ -12,7 +11,7 @@ class PostsController < ApplicationController
     redirect_to root_url
   end
 
-  def index 
+  def index
     # TODO: Should show posts for (current users + friends)
     @posts = Post.includes(comments: [:commentor])
       .where('user_id = ?', current_user.id)

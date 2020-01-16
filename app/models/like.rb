@@ -8,6 +8,8 @@ class Like < ApplicationRecord
   end
 
   def self.like(user, resource_type)
+    raise ArgumentError, 'resource cannot be null' unless resource_type
+
     resource_type.likes.create(user: user)
   end
 end
