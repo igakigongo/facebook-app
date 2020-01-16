@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   }
   root to: 'profile#index'
   resources :comments
+  resources :likes, only: [:create, :destroy]
   resources :posts
 end

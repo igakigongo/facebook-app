@@ -8,6 +8,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :timeoutable, :trackable, :validatable
 
   # associations
+  has_many :likes, dependent: :destroy
   has_many :posts
   # has_many :comments
 

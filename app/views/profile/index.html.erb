@@ -6,9 +6,9 @@
       </div>
       <div class="card-footer text-muted bg-white py-0">
         <ul class='nav justify-content-end'>
-          <li class='nav-item border-left'><a href='#' class='nav-link'>Timeline</a></li>
+          <li class='nav-item border-left'><a href='/' class='nav-link'>Timeline</a></li>
           <li class='nav-item border-left'><a href='#' class='nav-link'>About</a></li>
-          <li class='nav-item border-left'><a href='#' class='nav-link'>Friends</a></li>
+          <li class='nav-item border-left'><a href='/users/index' class='nav-link'>Friends</a></li>
           <li class='nav-item border-left'><a href='#' class='nav-link'>Photos</a></li>
           <li class='nav-item border-left'><a href='#' class='nav-link'><span class='px-2'><%= fa_icon "lock" %></span>Archive</a></li>
           <li class='nav-item border-left border-right mr-5'><a href='#' class='nav-link'>More</a></li>
@@ -55,7 +55,21 @@
               <div class='card-body pb-0'>
                 <p class='mb-0 pb-3 border-bottom'><%= post.text %></p>
                 <div class='post-actions my-1'>
-                  <button class='btn btn-like'><%= fa_icon 'thumbs-o-up 2x'%> Like</button>
+                  <!-- render create form in case user has never liked post -->
+                  <% if !post.likes.find_by(user_id: current_user.id) %>
+                    <%= form_for(@new_like, as: :like, html: { class: 'w-100', id: "post-like-#{post.id}"}) do |plf|  %>
+                      <%= plf.hidden_field :likeable_id, :value => post.id, id: "post-likeable-id-#{post.id}" %>
+                      <%= plf.hidden_field :likeable_type, :value => 'post', id: "post-likeable-type-#{post.id}" %>
+                      <button class='btn btn-like btn-block' type='submit'>
+                        <%= fa_icon 'thumbs-o-up 2x'%> Like
+                      </button>
+                    <% end %>
+                  <% else %>
+                    <!-- else render destroy in case user already likes post  -->
+                    <button class='btn btn-like' type='submit'>
+                      <%= fa_icon 'thumbs-o-down 2x'%> Unlike
+                    </button>
+                  <% end %>
                   <button class='btn btn-comment'><%= fa_icon 'comment 2x'%> Comment</button>
                 </div>
               </div>
@@ -64,25 +78,42 @@
                 <% if post.comments.any? %>
                   <ul class='comments p-0'>
                     <% post.comments.each do |c| %>
-                      <li class='py-2'>
-                        <img alt='' class='align-self-start rounded-circle gravatar-small' src='<%= post.creator.image_url %>%' />
-                        <span class='ml-3 p-2 rounded-lg'><%= link_to c.commentor.full_name, path: root_path %> <%= c.text %></span>
+                      <li class='comment py-2'>
+                        <div class='d-flex flex-row justify-content-center gravatar-holder'>
+                          <img alt='' class='rounded-circle gravatar-small' src='<%= post.creator.image_url %>%' />
+                        </div>
+                        <span class='p-2 rounded-lg comment-description'> 
+                          <a class='font-weight-bold' href='/'><%= c.commentor.full_name %></a> <%= c.text %>
+                        </span>
+                        <div class='comment-like-section'>
+                          <% if true %>
+                            <%= form_for(@new_like, as: :like, html: { class: 'w-100', id: "comment-like-form-#{c.id}"}) do |plf| %>
+                              <%= plf.hidden_field :likeable_id, :value => c.id, id: "comment-likeable-id-#{c.id}" %>
+                              <%= plf.hidden_field :likeable_type, :value => 'comment', id: "comment-likeable-type-#{c.id}" %>
+                              <a class='a-comment-like' href='#' type='submit'>
+                                Like
+                              </a>
+                            <% end %>
+                          <% else %>
+                            <!-- else render destroy in case user already likes post  -->
+                            <button class='btn btn-like' type='submit'>
+                              <%= fa_icon 'thumbs-o-up 2x'%> Unlike
+                            </button>
+                          <% end %>
+                        </div>
                       </li>
                     <% end %>
                   </ul>
                 <% end %>
                 <!-- create comment section is the last -->
-                <%= form_for(@new_comment, as: :comment) do |cf| %>
-                  <%= cf.hidden_field :post_id, :value => post.id %>
+                <%= form_for(@new_comment, as: :comment, html: { id: "create-comment-#{post.id}"}) do |cf| %>
+                  <%= cf.hidden_field :post_id, :value => post.id, id: "create-comment-post-id-#{post.id}" %>
                   <div class='py-2 add-comment'>
                     <div class='d-flex flex-row justify-content-center gravatar-holder'>
                       <img alt='' class='align-self-start rounded-circle gravatar-small' src='<%= post.creator.image_url %>%' />
                     </div>
-                    <%= cf.text_area :text %>
-                    <!--<textarea class='form-control py-2' name='comment[text]' oninput='growTextArea(this)' 
-                      onkeydown='commentKeyPressEventHandler(evt, this)' rows='1'>
-                    </textarea>-->
-                    <button class='btn btn-primary btn-save'>Save</button>
+                    <%= cf.text_area :text, class: 'form-control py-2 comment-form-description-editor', id: "comment-text-id-#{post.id}", rows: 1 %>
+                    <button class='align-self-start btn btn-primary btn-sm btn-save'>Save</button>
                   </div>
                 <% end %>
               </div>
