@@ -16,7 +16,7 @@
 //= require turbolinks
 //= require_tree .
 
-$(function(){
+$(document).on('turbolinks:load', function(){
 
   $('.comment-form-description-editor').on('input', function(){
     const element = this;

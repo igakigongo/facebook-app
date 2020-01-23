@@ -140,8 +140,8 @@ textarea.no-outline:focus {
   .gravatar {
     @include image-dimensions(2.5rem, 2.5rem);
   }
+}
 
-  .gravatar-small {
-    @include image-dimensions(2.0rem, 2.0rem);
-  }
+.gravatar-small {
+  @include image-dimensions(2.0rem, 2.0rem);
 }

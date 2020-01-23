@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   }
   
   resources :comments
+  resources :friendships, only: [:create, :destroy, :update]
   resources :likes, only: [:create, :destroy]
   resources :posts, only: [:create, :index]
   unauthenticated do
