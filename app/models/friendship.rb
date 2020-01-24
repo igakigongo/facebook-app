@@ -25,4 +25,9 @@ class Friendship < ApplicationRecord
       @other&.destroy
     end
   end
+
+  # helper methods
+  def self.confirmed_friends_for(user)
+    confirmed.where(user: user).map(&:friend)
+  end
 end
