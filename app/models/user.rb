@@ -10,7 +10,8 @@ class User < ApplicationRecord
   # associations
   has_many :likes, dependent: :destroy
   has_many :posts
-  # has_many :comments
+  has_many :friendships, dependent: :destroy
+  has_many :friends, through: :friendships
 
   # callbacks
   before_save :transform_email, :create_image_url
@@ -24,6 +25,23 @@ class User < ApplicationRecord
   # helpers
   def full_name
     "#{first_name} #{surname}"
+  end
+
+  def friend_with?(other_user)
+    Friendship.confirmed.where(user: self).where(friend: other_user).exists?
+  end
+
+  def pending_friend_request_to?(other_user)
+    Friendship.pending_requests.where(user: self).where(friend: other_user).exists?
+  end
+
+  def pending_friend_request_from?(other_user)
+    Friendship.pending_requests.where(user: other_user).where(friend: self).exists?
+  end
+
+  def pending_friend_requests
+    0
+    # Friendship.pending_requests.where(user: self).count()
   end
 
   protected

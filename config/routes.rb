@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
-  # match 'profile/:id'
   get 'profile/:id' => 'profile#index', as: :profile, constraints: { id: /[0-9]+/ }
   get 'users/index'
+  get 'users/friend_requests'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
   
   resources :comments
+  resources :friendships, only: [:create, :destroy, :update]
   resources :likes, only: [:create, :destroy]
   resources :posts, only: [:create, :index]
   unauthenticated do

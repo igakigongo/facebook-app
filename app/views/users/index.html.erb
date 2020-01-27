@@ -1,3 +1,4 @@
+<% @friendship = Friendship.new %>
 <div class='container mt-3'>
   <% if @users.empty? %>
     <div class='alert alert-primary'>
@@ -6,10 +7,56 @@
   <% else %>
     <div class='col'>
       <% @users.each do |user| %>
-        <p class='bg-white border p-2 shadow d-flex justify-content-between'>
-          <span><%= user.full_name %></span>
-          <button class='btn btn-primary btn-sm'>Dummy Send Request</button>
-        </p>
+        <div class='bg-white border p-2 shadow d-flex justify-content-between mb-2 rounded'>
+          <span>   
+            <img alt='' class='rounded-circle gravatar-small' src='<%= user.image_url %>' />
+            <%= user.full_name %>
+          </span>
+          <!-- user is already a friend -->
+          <% if current_user.friend_with?(user) %>
+            <% @f = Friendship.find_by(user: user, friend: current_user) %> 
+            <%= form_for(@f, html: { class: 'float-right', id: "create-friendship-reject-#{user.id}", method: 'delete' }) do |f| %>
+              <%= f.hidden_field :friend_id, :value => user.id, id: "friendship-friend-reject-id-#{user.id}" %>
+              <%= f.hidden_field :user_id, :value => current_user.id, id: "friendship-user-reject-id-#{user.id}" %>
+              <%= f.submit 'Remove friend', class: 'btn btn-danger btn-sm ml-3' %>
+            <% end %>
+
+          <!-- I have a request from user -->
+          <% elsif current_user.pending_friend_request_from?(user) %>
+            <% @f = Friendship.find_by(user: user, friend: current_user) %> 
+            <div class='confirm-reject-div'>
+              <span class='small'>Pending Request</span>
+              <%= form_for(@f, html: { id: "create-friendship-confirm-#{user.id}", method: 'put' }) do |f| %>
+                <%= f.hidden_field :friend_id, :value => user.id, id: "friendship-friend-confirm-id-#{user.id}" %>
+                <%= f.hidden_field :user_id, :value => current_user.id, id: "friendship-user-confirm-id-#{user.id}" %>
+                <%= f.submit 'Confirm', class: 'btn btn-primary btn-sm ml-3' %>
+              <% end %>
+              <%= form_for(@f, html: { class: 'float-right', id: "create-friendship-reject-#{user.id}", method: 'delete' }) do |f| %>
+                <%= f.hidden_field :friend_id, :value => user.id, id: "friendship-friend-reject-id-#{user.id}" %>
+                <%= f.hidden_field :user_id, :value => current_user.id, id: "friendship-user-reject-id-#{user.id}" %>
+                <%= f.submit 'Reject', class: 'btn btn-primary btn-sm ml-3' %>
+              <% end %>
+            </div>
+
+          <!-- I sent a request to user -->
+          <% elsif current_user.pending_friend_request_to?(user) %>
+            <% @f = Friendship.find_by(user: current_user, friend: user) %> 
+            <%= form_for(@f, html: { id: "create-friendship-#{user.id}", method: 'delete' }) do |f| %>
+              <%= f.hidden_field :friend_id, :value => user.id, id: "friendship-friend-id-#{user.id}" %>
+              <%= f.hidden_field :user_id, :value => current_user.id, id: "friendship-user-id-#{user.id}" %>
+              <span class='small mr-3'>Friend Request Sent</span>
+              <%= f.submit 'Cancel Request', class: 'btn btn-primary btn-sm' %>
+            <% end %>
+
+          <!-- default action  -->
+          <% else %>
+            <%= form_for(@friendship, html: { id: "create-friendship-#{user.id}"}) do |f| %>
+              <%= f.hidden_field :friend_id, :value => user.id, id: "friendship-friend-id-#{user.id}" %>
+              <%= f.hidden_field :user_id, :value => current_user.id, id: "friendship-user-id-#{user.id}" %>
+              <%= f.submit 'Send Friend Request', class: 'btn btn-primary btn-sm small' %>
+            <% end %>
+          <% end %>
+        </div>
       <% end %>
     </div>
   <% end %>
