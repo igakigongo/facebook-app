@@ -39,6 +39,11 @@ class User < ApplicationRecord
     Friendship.pending_requests.where(user: other_user).where(friend: self).exists?
   end
 
+  def pending_friend_requests
+    0
+    # Friendship.pending_requests.where(user: self).count()
+  end
+
   protected
 
   def create_image_url
