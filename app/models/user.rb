@@ -6,6 +6,7 @@ class User < ApplicationRecord
   # :confirmable,
   devise :database_authenticatable, :lockable, :registerable,
          :recoverable, :rememberable, :timeoutable, :trackable, :validatable
+  devise :omniauthable, omniauth_providers: %i[facebook]
 
   # associations
   has_many :likes, dependent: :destroy
@@ -41,7 +42,26 @@ class User < ApplicationRecord
 
   def pending_friend_requests
     0
-    # Friendship.pending_requests.where(user: self).count()
+  end
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).or(where(email: auth.info.email)).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.first_name = auth.info.name.split.first
+      user.surname = auth.info.name.split.last
+      user.gender = 'custom'
+      user.date_of_birth = 100.years.ago
+    end
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      data = session['devise.facebook_data']
+      if data && session['devise.facebook_data']['extra']['raw_info']
+        user.email = data['email'] if user.email.blank?
+      end
+    end
   end
 
   protected
