@@ -1,4 +1,4 @@
-# FACEBOOK CLONE - RAILS
+## FACEBOOK CLONE - RAILS
 
 The purpose of the project is to ensure that I can put into practice using Rails to create a simple clone of facebook while focusing on the following areas:
 
@@ -10,13 +10,33 @@ For more information please refer to the link below
 
 [The Odin Project: Building Facebook](https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project)
 
-## Useful Resources
+### Tasks (Pages of Interest)
+- Timeline - view all posts
+- Posts (With Liking and Commenting)
+- Friend (Add/Remove Friends)
+
+### Useful Resources
 
 * [Active Record Associations](https://guides.rubyonrails.org/association_basics.html)
 * [Devise](https://github.com/plataformatec/devise)
 * [Feature Testing with Capybara](https://github.com/teamcapybara/capybara)
-* [OminAuth](https://github.com/omniauth/omniauth)
+* [OmniAuth](https://github.com/omniauth/omniauth)
 
-## Contributors
+### Wiki Section
+For more information about the project set up such as models and devise, please refer to my [wiki page](https://github.com/igakigongo/facebook-app/wiki)
+
+### Screenshots
+
+#### Friends Page
+Lists all users - you can send a request to those who are not your friends from this page
+
+![](screenshots/friends.png)
+
+#### Posts Page
+Shows a list of all posts including posts from friends, you can comment and like posts from this page
+
+![](screenshots/posts.png)
+
+### Contributors
 
 * [Edward Iga Kigongo](https://github.com/igakigongo)
